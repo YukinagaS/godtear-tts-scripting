@@ -9,6 +9,11 @@ BLUEHEXBAG_GUID = "788ee2"
 YELLOWHEXBAG_GUID = "3b5ba2"
 BOARD_GUID = "3efde7"
 SCEN_ZONE = "6a40d3"
+SPEED_BOON = "030a49"
+DODGE_BOON = "2e4856"
+PROTECTION_BOON = "2bfe82"
+ACCURACY_BOON = "a0631e"
+DAMAGE_BOON = "c0630f"
 
 --Scenario GUIDS
 LIFE_CARD = "3f1dc6"
@@ -235,8 +240,21 @@ function setUpHexes()
 
     --Fanmade Choice Scenario Setup
     if readZone().guid == CHOICE_CARD then
+        local speedBag = getObjectFromGUID(SPEED_BOON)
+        local protBag = getObjectFromGUID(PROTECTION_BOON)
+        local speed_array = {{-6.15,3.29},{9.15,3.29},{-7.42,-3.26},{7.88,-3.26}}
+        local prot_array = {{1.5,3.29},{0.23,-3.26}}
         local map_array = {{-6.15,3.29},{1.5,3.29},{9.15,3.29},{-7.42,-3.26},{0.23,-3.26},{7.88,-3.26}}
         makeMap(battleLadderStep3, map_array)
+
+        for i, v in pairs(speed_array) do
+            speedBag.takeObject({position = {v[1], 1.93, v[2]}, rotation = {0, 180, 180}}).setLock(true)
+        end
+
+        for i, v in pairs(prot_array) do
+            protBag.takeObject({position = {v[1], 1.93, v[2]}, rotation = {0, 180, 180}}).setLock(true)
+        end
+
     end
 
     --Fanmade Consume Scenario Setup
